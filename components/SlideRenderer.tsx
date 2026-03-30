@@ -6,9 +6,17 @@ interface SlideRendererProps {
   slide: SlideData;
   scale?: number;
   id?: string;
+  currentIndex?: number;
+  totalSlides?: number;
 }
 
-const SlideRenderer: React.FC<SlideRendererProps> = ({ slide, scale = 1, id }) => {
+const SlideRenderer: React.FC<SlideRendererProps> = ({ 
+  slide, 
+  scale = 1, 
+  id,
+  currentIndex = 0,
+  totalSlides = 1
+}) => {
   const slideClass = `slide-${slide.id}`;
 
   const c = slide.colors || {
@@ -140,6 +148,28 @@ const SlideRenderer: React.FC<SlideRendererProps> = ({ slide, scale = 1, id }) =
     </div>
   );
 
+  const CarouselIndicator = () => (
+    <div className="slide-carousel-indicator">
+      {Array.from({ length: totalSlides }).map((_, i) => (
+        <div 
+          key={i} 
+          className={`indicator-dot ${i === currentIndex ? 'active' : ''}`}
+          style={{ backgroundColor: i === currentIndex ? c.primary : `${c.primary}33` }}
+        />
+      ))}
+    </div>
+  );
+
+  const Footer = () => (
+    <div className="slide-footer" style={{ color: c.primary }}>
+      <div className="footer-line" style={{ backgroundColor: c.secondary }}></div>
+      <div className="footer-content">
+        <div className="footer-right"><b>منصة المستثمر الاقتصادية</b></div>
+        <div className="footer-left">al-investor.com</div>
+      </div>
+    </div>
+  );
+
   return (
     <div
       id={id}
@@ -151,10 +181,16 @@ const SlideRenderer: React.FC<SlideRendererProps> = ({ slide, scale = 1, id }) =
           __html: slide.customCss.replace(/\.poster/g, `.${slideClass} .poster`)
         }} />
       )}
-      {slide.type === 'intro' && renderIntro()}
-      {slide.type === 'stats' && renderStats()}
-      {slide.type === 'points' && renderPoints()}
-      {slide.type === 'closing' && renderClosing()}
+      <div className="vertical-layout">
+        <div className="slide-content-main">
+          {slide.type === 'intro' && renderIntro()}
+          {slide.type === 'stats' && renderStats()}
+          {slide.type === 'points' && renderPoints()}
+          {slide.type === 'closing' && renderClosing()}
+        </div>
+        <CarouselIndicator />
+        <Footer />
+      </div>
     </div>
   );
 };

@@ -131,7 +131,11 @@ const App: React.FC = () => {
                 }`}
               >
                 <div className="slide-thumbnail-preview">
-                  <SlideRenderer slide={slide} />
+                  <SlideRenderer 
+                    slide={slide} 
+                    currentIndex={idx} 
+                    totalSlides={project.slides.length} 
+                  />
                 </div>
                 <div className="thumbnail-number">{idx + 1}</div>
                 <button
@@ -154,7 +158,11 @@ const App: React.FC = () => {
         <section className="app-canvas">
            <div className="canvas-container">
               <div id="active-slide-container">
-                <SlideRenderer slide={project.slides[activeSlideIndex]} />
+                 <SlideRenderer 
+                   slide={project.slides[activeSlideIndex]} 
+                   currentIndex={activeSlideIndex} 
+                   totalSlides={project.slides.length} 
+                 />
               </div>
               <div className="slide-indicators">
                 <div className="indicators-wrapper">
