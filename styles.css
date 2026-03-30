@@ -6,12 +6,18 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
 }
 
 body {
   font-family: 'IBM Plex Sans Arabic', sans-serif;
   overflow-x: hidden;
 }
+
+/* Utilities */
+.hidden { display: none; }
+.flex { display: flex; }
+.gap-2 { gap: 8px; }
 
 /* ===================================
    Main App Container
@@ -214,7 +220,7 @@ body {
 .slide-thumbnail {
   position: relative;
   cursor: pointer;
-  border-radius: 16px;
+  border-radius: 0;
   overflow: hidden;
   border: 2px solid transparent;
   transition: all 0.3s;
@@ -823,7 +829,7 @@ body {
 .slide-container {
   width: 100%;
   aspect-ratio: 4/5;
-  border-radius: 20px;
+  border-radius: 0;
   overflow: hidden;
   position: relative;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
@@ -933,6 +939,7 @@ body {
   letter-spacing: 0.15em;
   text-transform: uppercase;
   opacity: 0.8;
+  white-space: nowrap;
 }
 
 .intro-title,
@@ -992,49 +999,43 @@ body {
   width: 60px;
 }
 
+.slide-content-image-wrapper {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.slide-content-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.slide-content-image-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  pointer-events: none;
+}
+
 .stat-divider {
   height: 40px;
   width: 3px;
 }
 
-.intro-footer,
-.stats-footer,
-.points-footer {
-  padding: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-top: 1px solid;
-  opacity: 0.8;
-}
+/* Footers removed */
 
-.intro-footer-text,
-.stats-footer-text,
-.points-footer-text,
-.closing-footer-text {
-  font-size: 10px;
-  font-weight: 700;
-}
-
-.intro-footer-indicators {
-  display: flex;
-  gap: 4px;
-}
-
-.footer-indicator-dot,
-.footer-indicator-line {
-  border-radius: 4px;
-}
-
-.footer-indicator-dot {
-  width: 5px;
-  height: 5px;
-}
-
-.footer-indicator-line {
-  width: 24px;
-  height: 5px;
-}
+/* Footer indicators removed */
 
 .stat-item {
   display: flex;
@@ -1137,68 +1138,13 @@ body {
   transform: scale(1.05);
 }
 
-.closing-footer {
-  padding: 24px;
-  border-top: 1px solid;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  border-color: rgba(255, 255, 255, 0.1);
-}
-
-.closing-social {
-  display: flex;
-  gap: 12px;
-  opacity: 0.5;
-  font-size: 12px;
-}
+/* Closing footer removed */
 
 /* ===================================
    Slide Footer Bar (5px + text)
    =================================== */
 
-.slide-footer-bar {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  flex-shrink: 0;
-}
-
-.slide-footer-bar-line {
-  height: 5px;
-  width: 100%;
-  background: linear-gradient(to right, var(--footer-color, #1e4d40), var(--footer-secondary, #27ae60));
-  flex-shrink: 0;
-}
-
-.slide-footer-text-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 6px 16px;
-  background-color: rgba(0, 0, 0, 0.02);
-  flex-shrink: 0;
-}
-
-.slide-footer-right,
-.slide-footer-left {
-  font-size: 10px;
-  font-weight: 700;
-  white-space: nowrap;
-  letter-spacing: 0.5px;
-}
-
-.slide-footer-right {
-  text-align: right;
-  direction: rtl;
-}
-
-.slide-footer-left {
-  text-align: left;
-  direction: ltr;
-  font-family: 'Courier New', monospace;
-}
+/* Slide footer bar removed */
 
 /* ===================================
    Responsive Design

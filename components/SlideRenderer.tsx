@@ -57,23 +57,13 @@ const SlideRenderer: React.FC<SlideRendererProps> = ({ slide, scale = 1, id }) =
           {slide.description}
         </p>
         <div className="intro-divider" style={{ backgroundColor: c.secondary }}></div>
+        {slide.contentImage && (
+          <div className="slide-content-image-wrapper">
+             <img src={slide.contentImage} alt="Content" className="slide-content-image" />
+          </div>
+        )}
       </div>
 
-      <div className="intro-footer" style={{ backgroundColor: c.bg, borderColor: `${c.primary}1a` }}>
-        <span className="intro-footer-text" style={{ color: c.primary }}>{slide.footer}</span>
-        <div className="intro-footer-indicators">
-          <div className="footer-indicator-dot" style={{ backgroundColor: c.primary }}></div>
-          <div className="footer-indicator-line" style={{ backgroundColor: `${c.primary}33` }}></div>
-        </div>
-      </div>
-
-      <div className="slide-footer-bar">
-        <div className="slide-footer-text-container">
-          <span className="slide-footer-right" style={{ color: c.primary }}>منصة المستثمر</span>
-          <span className="slide-footer-left" style={{ color: c.primary }}>al_investor.com</span>
-        </div>
-        <div className="slide-footer-bar-line" style={{ background: `linear-gradient(to right, ${c.primary}, ${c.secondary})` }}></div>
-      </div>
     </div>
   );
 
@@ -94,17 +84,11 @@ const SlideRenderer: React.FC<SlideRendererProps> = ({ slide, scale = 1, id }) =
             <div className="stat-label" style={{ color: c.primary }}>{stat.label}</div>
           </div>
         ))}
-      </div>
-      <div className="stats-footer" style={{ borderColor: `${c.primary}1a` }}>
-        <span className="stats-footer-text" style={{ color: c.primary }}>{slide.footer}</span>
-      </div>
-
-      <div className="slide-footer-bar">
-        <div className="slide-footer-text-container">
-          <span className="slide-footer-right" style={{ color: c.primary }}>منصة المستثمر</span>
-          <span className="slide-footer-left" style={{ color: c.primary }}>al_investor.com</span>
-        </div>
-        <div className="slide-footer-bar-line" style={{ background: `linear-gradient(to right, ${c.primary}, ${c.secondary})` }}></div>
+        {slide.contentImage && (
+          <div className="slide-content-image-wrapper">
+             <img src={slide.contentImage} alt="Content" className="slide-content-image" />
+          </div>
+        )}
       </div>
     </div>
   );
@@ -125,17 +109,11 @@ const SlideRenderer: React.FC<SlideRendererProps> = ({ slide, scale = 1, id }) =
             <p className="point-text" style={{ color: c.primary }}>{point.text}</p>
           </div>
         ))}
-      </div>
-      <div className="points-footer" style={{ borderColor: `${c.primary}1a` }}>
-        <span className="points-footer-text" style={{ color: c.primary }}>{slide.footer}</span>
-      </div>
-
-      <div className="slide-footer-bar">
-        <div className="slide-footer-text-container">
-          <span className="slide-footer-right" style={{ color: c.primary }}>منصة المستثمر</span>
-          <span className="slide-footer-left" style={{ color: c.primary }}>al_investor.com</span>
-        </div>
-        <div className="slide-footer-bar-line" style={{ background: `linear-gradient(to right, ${c.primary}, ${c.secondary})` }}></div>
+        {slide.contentImage && (
+          <div className="slide-content-image-wrapper">
+             <img src={slide.contentImage} alt="Content" className="slide-content-image" />
+          </div>
+        )}
       </div>
     </div>
   );
@@ -153,20 +131,11 @@ const SlideRenderer: React.FC<SlideRendererProps> = ({ slide, scale = 1, id }) =
         <div className="closing-cta" style={{ backgroundColor: c.bg, color: c.primary }}>
           تواصل معنا الآن
         </div>
-      </div>
-      <div className="closing-footer" style={{ borderColor: 'rgba(255,255,255,0.1)' }}>
-        <div className="closing-social">
-          <span>X</span><span>Instagram</span><span>LinkedIn</span>
-        </div>
-        <span className="closing-footer-text">{slide.footer}</span>
-      </div>
-
-      <div className="slide-footer-bar">
-        <div className="slide-footer-text-container">
-          <span className="slide-footer-right" style={{ color: '#ffffff' }}>منصة المستثمر</span>
-          <span className="slide-footer-left" style={{ color: '#ffffff' }}>al_investor.com</span>
-        </div>
-        <div className="slide-footer-bar-line" style={{ background: `linear-gradient(to right, #ffffff, ${c.secondary})` }}></div>
+        {slide.contentImage && (
+          <div className="slide-content-image-wrapper">
+             <img src={slide.contentImage} alt="Content" className="slide-content-image" />
+          </div>
+        )}
       </div>
     </div>
   );

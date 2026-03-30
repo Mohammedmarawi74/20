@@ -34,6 +34,7 @@ export interface SlideData {
   footer?: string;
   customCss?: string;
   colors?: SlideColors; // الألوان المخصصة لهذه الشريحة
+  contentImage?: string;
 }
 
 export interface CarouselProject {

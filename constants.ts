@@ -56,8 +56,8 @@ export const DEFAULT_SLIDES: any[] = [
     title: 'مبادرة السعودية الخضراء',
     subtitle: 'منصة المتسثمر الاقتصادية',
     description: 'تهدف المبادرة إلى تحسين جودة الحياة وحماية الأجيال القادمة من خلال زراعة 10 مليارات شجرة وتقليل الانبعاثات الكربونية.',
-    heroImage: 'https://images.unsplash.com/photo-1589407633215-460d36746401?q=80&w=800',
-    footer: 'المملكة العربية السعودية - رؤية 2030',
+    heroImage: 'https://images.unsplash.com/photo-1574241604934-63cdd3858b0f?q=80&w=800',
+    contentImage: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=800',
     colors: THEMES[0]
   }
 ];

@@ -21,6 +21,19 @@ const Editor: React.FC<EditorProps> = ({ slide, updateSlide, onReplaceAllSlides 
     updateSlide({ ...slide, [field]: value });
   };
 
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>, field: keyof SlideData) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      if (event.target?.result) {
+        handleChange(field, event.target.result as string);
+      }
+    };
+    reader.readAsDataURL(file);
+  };
+
   const handleColorChange = (key: keyof SlideColors, value: string) => {
     const newColors = { ...(slide.colors || THEMES[0]), [key]: value };
     handleChange('colors', newColors);
@@ -100,19 +113,35 @@ const Editor: React.FC<EditorProps> = ({ slide, updateSlide, onReplaceAllSlides 
 
             <div className="logo-upload-section">
               <div className="logo-section-header">
-                <label className="logo-upload-label">اختر شعاراً جاهزاً</label>
-                {slide.logo && (
+                <label className="logo-upload-label">الشعار (رفع أو اختيار جـاهز)</label>
+                <div className="flex gap-2">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => handleFileUpload(e, 'logo')}
+                    id="logo-image-upload"
+                    className="hidden"
+                  />
                   <button
-                    onClick={() => handleChange('logo', '')}
-                    className="btn-remove-logo"
-                    title="إزالة الشعار"
+                    onClick={() => document.getElementById('logo-image-upload')?.click()}
+                    className="btn-magic text-xs px-2"
+                    style={{ width: 'auto', marginBottom: '12px' }}
                   >
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                      <path d="M5.5 5.5A.5.5 0 016 6v6a.5.5 0 01-1 0V6a.5.5 0 01.5-.5zm2.5 0a.5.5 0 01.5.5v6a.5.5 0 01-1 0V6a.5.5 0 01.5-.5zm3 .5a.5.5 0 00-1 0v6a.5.5 0 001 0V6z"/>
-                      <path fillRule="evenodd" d="M14.5 3a1 1 0 01-1 1H13v9a2 2 0 01-2 2H5a2 2 0 01-2-2V4h-.5a1 1 0 01-1-1V2a1 1 0 011-1H6a1 1 0 011-1h2a1 1 0 011 1h3.5a1 1 0 011 1v1zM4.118 4L4 4.059V13a1 1 0 001 1h6a1 1 0 001-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                    </svg>
+                    رفع شعار خاص 📁
                   </button>
-                )}
+                  {slide.logo && (
+                    <button
+                      onClick={() => handleChange('logo', '')}
+                      className="btn-remove-logo"
+                      title="إزالة الشعار"
+                    >
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M5.5 5.5A.5.5 0 016 6v6a.5.5 0 01-1 0V6a.5.5 0 01.5-.5zm2.5 0a.5.5 0 01.5.5v6a.5.5 0 01-1 0V6a.5.5 0 01.5-.5zm3 .5a.5.5 0 00-1 0v6a.5.5 0 001 0V6z"/>
+                        <path fillRule="evenodd" d="M14.5 3a1 1 0 01-1 1H13v9a2 2 0 01-2 2H5a2 2 0 01-2-2V4h-.5a1 1 0 01-1-1V2a1 1 0 011-1H6a1 1 0 011-1h2a1 1 0 011 1h3.5a1 1 0 011 1v1zM4.118 4L4 4.059V13a1 1 0 001 1h6a1 1 0 001-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                      </svg>
+                    </button>
+                  )}
+                </div>
               </div>
               <div className="logo-options-grid">
                 {LOGO_PRESETS.filter(p => p.url).map((preset) => (
@@ -161,6 +190,38 @@ const Editor: React.FC<EditorProps> = ({ slide, updateSlide, onReplaceAllSlides 
             <div className="editor-input-group">
               <label className="editor-input-label">الوصف / المحتوى</label>
               <textarea value={slide.description || ''} onChange={(e) => handleChange('description', e.target.value)} className="editor-textarea" dir="rtl" />
+            </div>
+            <div className="editor-input-group">
+              <label className="editor-input-label">صورة المحتوى (تحميل مباشر)</label>
+              <div className="flex gap-2">
+                 <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => handleFileUpload(e, 'contentImage')}
+                  id="content-image-upload"
+                  className="hidden"
+                />
+                <button
+                   onClick={() => document.getElementById('content-image-upload')?.click()}
+                   className="btn-magic text-xs flex-1"
+                >
+                   {slide.contentImage ? 'تغيير الصورة 🖼️' : 'رفع صورة من الجهاز 📁'}
+                </button>
+                {slide.contentImage && (
+                  <button
+                    onClick={() => handleChange('contentImage', '')}
+                    className="btn-remove-logo"
+                    style={{ width: '45px', height: '45px' }}
+                  >
+                    ×
+                  </button>
+                )}
+              </div>
+              {slide.contentImage && (
+                <div className="mt-2 text-[9px] text-slate-500 overflow-hidden text-ellipsis whitespace-nowrap">
+                   الصورة مرفوعة وجاهزة ✅
+                </div>
+              )}
             </div>
             <button
               onClick={async () => {
